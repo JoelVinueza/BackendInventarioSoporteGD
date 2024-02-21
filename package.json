@@ -1,0 +1,16 @@
+{
+  "name": "backendinventariosoportegd",
+  "version": "1.0.0",
+  "description": "Backend para el proyecto de Inventario GD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js",
+    "MongoDb",
+    "Express"
+  ],
+  "author": "Joel Vinueza, Lian Mejia",
+  "license": "ISC"
+}
