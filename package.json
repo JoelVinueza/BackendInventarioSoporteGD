@@ -1,15 +1,15 @@
 {
-  "name": "pryecto_prueba",
+  "name": "backend_inventario_soporte_gd",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend para el proyecto Soporte Difare",
   "main": "./src/index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Joel Vinueza",
+  "license": "GPL-3.0",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -23,5 +23,13 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "BackendInventarioSoporteGD"
+  },
+  "keywords": [
+    "Node.js",
+    "Express"
+  ]
 }
