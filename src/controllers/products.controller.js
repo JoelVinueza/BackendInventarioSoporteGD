@@ -24,7 +24,6 @@ export const createProduct = async (req, res) => {
 
 export const getProductById = async (req, res) => {
   const { serie } = req.params;
-
   const product = await Product.find(serie);
   res.status(200).json(product);
 };

@@ -22,6 +22,9 @@ export const createRoles = async () => {
 };
 
 export const createAdmin = async () => {
+
+  await createRoles();
+
   const userFound = await User.findOne({ email: ADMIN_EMAIL });
   console.log(userFound);
   if (userFound) return;
@@ -31,16 +34,16 @@ export const createAdmin = async () => {
   if (roles.length === 0) {
     console.log("No se encontraron roles con los nombres especificados.");
   }
-  
+
   const newUser = await User.create({
-    username: ADMIN_USERNAME,
-    email: ADMIN_EMAIL,
-    password: ADMIN_PASSWORD,
-    roles: roles.map((role) => role._id),
+  username: ADMIN_USERNAME,
+  email: ADMIN_EMAIL,
+  password: ADMIN_PASSWORD,
+  roles: await roles.map((role) => role._id),
   });
 
   console.log(`new user created: ${newUser.email}`);
+  
 };
 
-createRoles();
 createAdmin();
