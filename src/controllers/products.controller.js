@@ -9,6 +9,7 @@ export const createProduct = async (req, res) => {
       modelo,
       marca,
       nombre,
+      bodega,
       observacion,
     });
 

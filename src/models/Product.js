@@ -20,7 +20,12 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
 
-    nombre: {
+    nombre:{
+      type: String,
+      required: true,
+    },
+
+    bodega:{
       type: String,
       required: true,
     },
