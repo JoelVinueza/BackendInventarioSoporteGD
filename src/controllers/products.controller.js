@@ -23,8 +23,39 @@ export const createProduct = async (req, res) => {
 };
 
 export const getProductById = async (req, res) => {
+  const { productId } = req.params;
+  const product = await Product.findById(productId);
+  res.status(200).json(product);
+};
+
+export const getProductBySerie = async (req, res) => {
   const { serie } = req.params;
   const product = await Product.find(serie);
+  res.status(200).json(product);
+};
+
+export const getProductByModelo = async (req, res) => {
+  const { modelo } = req.params;
+  const product = await Product.find(modelo);
+  res.status(200).json(product)
+}
+
+export const getProductByMarca = async (req, res) => {
+  const { marca } = req.params;
+  const product = await Product.find(marca);
+  res.status(200).json(product);
+};
+
+
+export const getProductByNombre = async (req, res) => {
+  const { nombre } = req.params;
+  const product = await Product.find(nombre);
+  res.status(200).json(product);
+};
+
+export const getProductByBodega = async (req, res) => {
+  const { bodega } = req.params;
+  const product = await Product.find(bodega);
   res.status(200).json(product);
 };
 
@@ -34,8 +65,8 @@ export const getProducts = async (req, res) => {
 };
 
 export const updateProductById = async (req, res) => {
-  const updatedProduct = await Product.findOneAndUpdate(
-    req.params.serie,
+  const updatedProduct = await Product.findByIdAndUpdate(
+    req.params.productId,
     req.body,
     {
       new: true,
@@ -45,9 +76,7 @@ export const updateProductById = async (req, res) => {
 };
 
 export const deleteProductById = async (req, res) => {
-  const { serie } = req.params;
-
-  await Product.findOneAndDelete(serie);
-
+  const { productId } = req.params;
+  await Product.findByIdAndDelete(productId);
   res.status(204).json();
 };
