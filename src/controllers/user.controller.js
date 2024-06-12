@@ -34,7 +34,7 @@ export const getUsers = async (req, res) => {
   return res.json(users);
 };
 
-export const getUser = async (req, res) => {
+export const getUserByID = async (req, res) => {
   const user = await User.findById(req.params.userId);
   return res.json(user);
 };
