@@ -1,19 +1,24 @@
 import { Router } from "express";
+import multer from "multer";
 import {
   getProducts,
-  createProduct,
-  updateProductById,
-  deleteProductById,
+
+  getProductById, 
   getProductBySerie,
   getProductByModelo,
   getProductByMarca,
   getProductByNombre,
   getProductByBodega,
-  getProductById,
+  
+  createProduct,
+  updateProductById,
+  deleteProductById,
+  imporProductsFromExcel,
 } from "../controllers/products.controller.js";
 import { verifyToken, isModerator, isAdmin } from "../middlewares/authJwt.js";
 
 const router = Router();
+const upload = multer({ dest: 'uploads/' })
 
 router.get("/", getProducts);
 
@@ -25,6 +30,7 @@ router.get("/:productNombre", getProductByNombre);
 router.get("/:productBodega", getProductByBodega);
 
 router.post("/", [verifyToken, isModerator], createProduct);
+router.post("/:import", [verifyToken, isAdmin, upload.single('file')], imporProductsFromExcel)
 
 router.put("/:productId", [verifyToken, isModerator], updateProductById);
 
