@@ -3,7 +3,7 @@ import xlsx from "xlsx";
 import fs from "fs";
 
 export const createProduct = async (req, res) => {
-  const { serie, modelo, marca, nombre, observacion, } = req.body;
+  const { serie, modelo, marca, nombre, bodega, observacion, } = req.body;
 
   try {
     const newProduct = new Product({
