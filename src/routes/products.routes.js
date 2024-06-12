@@ -30,7 +30,7 @@ router.get("/:productNombre", getProductByNombre);
 router.get("/:productBodega", getProductByBodega);
 
 router.post("/", [verifyToken, isModerator], createProduct);
-router.post("/:import", [verifyToken, isAdmin, upload.single('file')], imporProductsFromExcel)
+router.post("/:import", [verifyToken, isAdmin, upload.single('file')], imporProductsFromExcel);
 
 router.put("/:productId", [verifyToken, isModerator], updateProductById);
 
