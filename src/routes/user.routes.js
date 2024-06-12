@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsers, createUser } from "../controllers/user.controller.js";
+import { getUsers, getUserByID, createUser } from "../controllers/user.controller.js";
 import { isAdmin, verifyToken } from "../middlewares/authJwt.js";
 import { checkExistingUser } from "../middlewares/verifySignup.js";
 
