@@ -13,7 +13,7 @@ import {
   createProduct,
   updateProductById,
   deleteProductById,
-  imporProductsFromExcel,
+  importProductsFromExcel,
 } from "../controllers/products.controller.js";
 import { verifyToken, isModerator, isAdmin } from "../middlewares/authJwt.js";
 
@@ -30,7 +30,7 @@ router.get("/:productNombre", getProductByNombre);
 router.get("/:productBodega", getProductByBodega);
 
 router.post("/", [verifyToken, isModerator], createProduct);
-router.post("/:import", [verifyToken, isAdmin, upload.single('file')], imporProductsFromExcel);
+router.post("/:import", [verifyToken, isAdmin, upload.single('file')], importProductsFromExcel);
 
 router.put("/:productId", [verifyToken, isModerator], updateProductById);
 

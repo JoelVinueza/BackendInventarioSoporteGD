@@ -83,7 +83,7 @@ export const deleteProductById = async (req, res) => {
   res.status(204).json();
 };
 
-export const imporProductsFromExcel = async (req, res) =>{
+export const importProductsFromExcel = async (req, res) =>{
   const filePath = req.file.path;
 
   try {
