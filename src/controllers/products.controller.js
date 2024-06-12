@@ -1,4 +1,6 @@
 import Product from "../models/Product.js";
+import xlsx from "xlsx";
+import fs from "fs";
 
 export const createProduct = async (req, res) => {
   const { serie, modelo, marca, nombre, observacion, } = req.body;
@@ -79,4 +81,24 @@ export const deleteProductById = async (req, res) => {
   const { productId } = req.params;
   await Product.findByIdAndDelete(productId);
   res.status(204).json();
+};
+
+export const imporProductsFromExcel = async (req, res) =>{
+  const filePath = req.file.path;
+
+  try {
+    const workbook = xlsx.readFile(filePath);
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+
+    const savedData = await Product.insertMany(datos);
+    fs.unlinkSync(filePath);
+    res.status(200).json(savedData);
+
+  } catch (error) {
+    fs.unlinkSync(filePath);
+    console.log(error);
+    return res.status(500).json(error);
+  }
+
 };
