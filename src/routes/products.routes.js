@@ -4,6 +4,7 @@ import {
   createProduct,
   updateProductById,
   deleteProductById,
+  getProductBySerie,
   getProductByModelo,
   getProductByMarca,
   getProductByNombre,
