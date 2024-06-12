@@ -90,6 +90,7 @@ export const imporProductsFromExcel = async (req, res) =>{
     const workbook = xlsx.readFile(filePath);
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
+    const datos = xlxs.utils.sheet_to_json(worksheet);
 
     const savedData = await Product.insertMany(datos);
     fs.unlinkSync(filePath);
