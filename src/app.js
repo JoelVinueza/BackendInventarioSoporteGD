@@ -13,10 +13,7 @@ const app = express();
 app.set("port", process.env.PORT || 4000);
 app.set("json spaces", 4);
 
-app.use(
-  cors({
-  })
-);
+app.use(cors({}));
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
