@@ -30,11 +30,39 @@ export const createUser = async (req, res) => {
 };
 
 export const getUsers = async (req, res) => {
-  const users = await User.find();
-  return res.json(users);
+  try {
+    const users = await User.find().populate("roles", "name");
+
+    const usersWithoutRoleIds = users.map(user => ({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: user.roles.map(role => role.name),
+    }));
+
+    return res.status(200).json(usersWithoutRoleIds);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Error al obtener los usuarios" });
+  }
 };
 
 export const getUserByID = async (req, res) => {
-  const user = await User.findById(req.params.userId);
-  return res.json(user);
+  try {
+    const user = await User.findById(req.params.userId).populate("roles", "name");
+
+    if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
+
+    const userWithoutRoleIds = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: user.roles.map(role => role.name),
+    };
+
+    return res.status(200).json(userWithoutRoleIds);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Error al obtener el usuario" });
+  }
 };
