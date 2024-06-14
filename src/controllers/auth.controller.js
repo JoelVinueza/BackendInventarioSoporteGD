@@ -13,10 +13,6 @@ export const signupHandler = async (req, res) => {
       return res.status(400).json({ message: "La contraseña no puede estar vacía o contener solo espacios." });
     }
 
-    if (trimmedPassword.length < 8) {
-      return res.status(400).json({ message: "La contraseña debe tener al menos 8 caracteres." });
-    }
-
     const newUser = new User({
       username,
       email,
@@ -55,10 +51,6 @@ export const signinHandler = async (req, res) => {
 
     if (trimmedPassword.length === 0) {
       return res.status(400).json({ message: "La contraseña no puede estar vacía o contener solo espacios." });
-    }
-
-    if (trimmedPassword.length < 8) {
-      return res.status(400).json({ message: "La contraseña debe tener al menos 8 caracteres." });
     }
     
     const matchPassword = await User.comparePassword(
