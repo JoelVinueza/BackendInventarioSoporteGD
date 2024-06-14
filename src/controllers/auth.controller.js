@@ -51,10 +51,21 @@ export const signinHandler = async (req, res) => {
 
     if (!userFound) return res.status(400).json({ message: "User Not Found" });
 
+    const trimmedPassword = req.body.password.trim();
+
+    if (trimmedPassword.length === 0) {
+      return res.status(400).json({ message: "La contraseña no puede estar vacía o contener solo espacios." });
+    }
+
+    if (trimmedPassword.length < 8) {
+      return res.status(400).json({ message: "La contraseña debe tener al menos 8 caracteres." });
+    }
+    
     const matchPassword = await User.comparePassword(
-      req.body.password,
+      trimmedPassword,
       userFound.password
     );
+    console.log(`Password match: ${matchPassword}`);
 
     if (!matchPassword)
       return res.status(401).json({
