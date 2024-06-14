@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Role from "../models/Role.js";
+import { obtainUserIdByToken } from "../middlewares/authJwt.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -47,12 +48,14 @@ export const getUsers = async (req, res) => {
   }
 };
 
-export const getUserByID = async (req, res) => {
+export const getUserByToken = async (req, res) => {
+
+  let token = req.headers["x-access-token"];
+
   try {
-    const user = await User.findById(req.params.userId).populate("roles", "name");
-
+    const userId = await obtainUserIdByToken(token);
+    const user = await User.findById(userId).populate("roles", "name");
     if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
-
     const userWithoutRoleIds = {
       _id: user._id,
       username: user.username,
