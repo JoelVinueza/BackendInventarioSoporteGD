@@ -57,7 +57,6 @@ export const signinHandler = async (req, res) => {
       trimmedPassword,
       userFound.password
     );
-    console.log(`Password match: ${matchPassword}`);
 
     if (!matchPassword)
       return res.status(401).json({
