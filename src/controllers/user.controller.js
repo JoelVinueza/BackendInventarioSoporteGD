@@ -6,6 +6,8 @@ export const createUser = async (req, res) => {
   try {
     const { username, email, password, roles } = req.body;
 
+    const validEmail = email.split('@')[1];
+    if(validEmail !== 'grupodifare.com')return res.status(404).json({message: "El dominio de email debe ser (@grupodifare.com)"});
     const rolesFound = await Role.find({ name: { $in: roles } });
 
     const user = new User({
