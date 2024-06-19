@@ -15,7 +15,7 @@ import {
   deleteProductById,
   importProductsFromExcel,
 } from "../controllers/products.controller.js";
-import { verifyToken, isModerator, isAdmin } from "../middlewares/authJwt.js";
+import { verifyToken, isModeratorOrSupervisor, isAdminOrSupervisor } from "../middlewares/authJwt.js";
 
 const router = Router();
 const upload = multer({ dest: 'uploads/' })
@@ -29,11 +29,11 @@ router.get("/:productMarca", getProductByMarca);
 router.get("/:productNombre", getProductByNombre);
 router.get("/:productBodega", getProductByBodega);
 
-router.post("/", [verifyToken, isModerator], createProduct);
-router.post("/import", [verifyToken, isAdmin, upload.single('file')], importProductsFromExcel);
+router.post("/", [verifyToken, isModeratorOrSupervisor], createProduct);
+router.post("/import", [verifyToken, isAdminOrSupervisor, upload.single('file')], importProductsFromExcel);
 
-router.put("/:productId", [verifyToken, isModerator], updateProductById);
+router.put("/:productId", [verifyToken, isModeratorOrSupervisor], updateProductById);
 
-router.delete("/:productId", [verifyToken, isAdmin], deleteProductById);
+router.delete("/:productId", [verifyToken, isAdminOrSupervisor], deleteProductById);
 
 export default router;

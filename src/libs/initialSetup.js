@@ -13,6 +13,7 @@ export const createRoles = async () => {
       new Role({ name: "user" }).save(),
       new Role({ name: "moderator" }).save(),
       new Role({ name: "admin" }).save(),
+      new Role({ name: "supervisor" }).save(),
     ]);
 
     console.log(values);
@@ -29,7 +30,7 @@ export const createAdmin = async () => {
   console.log(userFound);
   if (userFound) return;
 
-  const roles = await Role.find({ name: { $in: ["admin", "moderator"] } });
+  const roles = await Role.find({ name: { $in: ["supervisor"] } });
   
   if (roles.length === 0) {
     console.log("No se encontraron roles con los nombres especificados.");

@@ -5,6 +5,6 @@ POST {{api}}/signin
 Content-Type: application/json
 
 {
-  "email": "vinuezaGarcia@localhost.local",
-  "password": "admin"
+  "email": "joel.vinueza@grupodifare.com",
+  "password": "1234567890"
 }
