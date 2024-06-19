@@ -92,7 +92,16 @@ export const importProductsFromExcel = async (req, res) =>{
     const worksheet = workbook.Sheets[sheetName];
     const datos = xlsx.utils.sheet_to_json(worksheet);
 
-    const savedData = await Product.insertMany(datos);
+    const products = datos.map(item => ({
+      serie: item.Serie,
+      modelo: item.Modelo,
+      marca: item.Marca,
+      nombre: item.Nombre,
+      bodega: item.Bodega,
+      observacion: item.Observacion,
+    }));
+
+    const savedData = await Product.insertMany(products);
     fs.unlinkSync(filePath);
     res.status(200).json(savedData);
 
